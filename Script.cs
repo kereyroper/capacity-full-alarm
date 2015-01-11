@@ -1,8 +1,8 @@
-voidMain()
+void Main()
 {
     var block = new List<IMyTerminalBlock>();
-    GridTerminalSystem.GetBlocksOfType<IMyRadioAntenna>(block);
-    var antenna = block[0];
+    GridTerminalSystem.GetBlocksOfType<IMySoundBlock>(block);
+    var soundBlock = block[0] as IMySoundBlock;
 
     double max = 0.0;
     double curr = 0.0;
@@ -23,12 +23,8 @@ voidMain()
     var fill = (double)curr/(double)max;
     int percent = (int)(fill*100);
 
-    if(percent > 0)
+    if(percent > 95)
     {
-        antenna.SetCustomName("Cargo " + percent.ToString() + " percent full");
-    }
-    else
-    {
-        antenna.SetCustomName("Container is empty");
+        soundBlock.GetActionWithName("PlaySound").Apply(soundBlock);
     }
 }
